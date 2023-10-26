@@ -23,13 +23,13 @@ window.addEventListener('scroll', _.throttle(function () {
         //배지 숨기기
         // gsap.to(요소, 지속시간, 옵션);
         gsap.to(badgeEl, 0.6, {
-            opacity : 0,
+            opacity: 0,
             display: 'none'
         });
     } else {
         //배지 보이기
         gsap.to(badgeEl, 0.6, {
-            opacity : 1,
+            opacity: 1,
             display: 'block'
         });
     }
@@ -72,26 +72,37 @@ new Swiper('.promotion .swiper-container', {
 const promotionEl = document.querySelector('.promotion');
 const promotionToggleBtn = document.querySelector('.toggle-promotion');
 let isHidePromotion = false;
-promotionToggleBtn.addEventListener('click', function (){
+promotionToggleBtn.addEventListener('click', function () {
     isHidePromotion = !isHidePromotion
-    if(isHidePromotion){
+    if (isHidePromotion) {
         // 숨김 처리!
         promotionEl.classList.add('hide');
     }
-    else{
+    else {
         // 보임 처리!
         promotionEl.classList.remove('hide');
     }
 });
 
-function floatingObject(selector){
-    gsap.to(selector, 1, {
-        y: 20,
-        repeat: -1,
-        yoyo: true,
-        ease: Power1.easeInOut,
-        delay: 3
-    });
+
+
+function floatingObject(selector, delay, size) {
+    gsap.to(selector,
+        random(1.5, 2.5),
+        {
+            y: size,
+            repeat: -1,
+            yoyo: true,
+            ease: Power1.easeInOut,
+            delay: random(0, delay)
+        }
+    );
 }
 
-floatingObject('.floating');
+function random(min, max) {
+    return parseFloat((Math.random() * (max - min) + min)).toFixed(2)
+}
+
+floatingObject('.floating1', 1, 15);
+floatingObject('.floating2', 0.5, 15);
+floatingObject('.floating1', 1.5, 20);
